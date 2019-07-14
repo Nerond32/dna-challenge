@@ -17,13 +17,16 @@ const userRouter = User => {
       });
     })
     .post((req, res) => {
-      if (req.body.accCreated) {
-        delete req.body.accCreated;
+      if (req.body.login && req.body.password) {
+        if (req.body.accCreated) {
+          delete req.body.accCreated;
+        }
+        const user = new User(req.body);
+        user.accCreated = Date.now();
+        user.save();
+        return res.status(201).json(user);
       }
-      const user = new User(req.body);
-      user.accCreated = Date.now();
-      user.save();
-      return res.status(201).json(user);
+      return res.sendStatus(400);
     });
   router.use('/users/:userID', (req, res, next) => {
     User.findById(req.params.userID, (err, user) => {
@@ -40,9 +43,7 @@ const userRouter = User => {
   router
     .route('/users/:userID')
     .get((req, res) => {
-      User.findById(req.params.userID, (err, user) => {
-        return res.json(user);
-      });
+      return res.json(req.user);
     })
 
     .patch((req, res) => {
