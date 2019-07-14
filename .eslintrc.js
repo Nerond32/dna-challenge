@@ -13,6 +13,7 @@ module.exports = {
     },
     rules: {
       quotes: ['error', 'single'],
+      'no-unused-vars': 'warn',
       'prettier/prettier': ['error', { 'singleQuote': true }]
     }
   };
