@@ -1,0 +1,15 @@
+{
+  "name": "dna-challenge",
+  "version": "1.0.0",
+  "description": "DNA technical test(simple NodeJS backend)",
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/Nerond32/dna-challenge.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
