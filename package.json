@@ -3,13 +3,25 @@
   "version": "1.0.0",
   "description": "DNA technical test(simple NodeJS backend)",
   "repository": {
-    "type":"git",
-    "url":"https://github.com/Nerond32/dna-challenge.git"
+    "type": "git",
+    "url": "https://github.com/Nerond32/dna-challenge.git"
   },
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
