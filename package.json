@@ -8,17 +8,30 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "lint": "eslint .",
+    "start": "nodemon --exec \"npm run lint && node index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "750",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 3000
+    }
+  },
   "devDependencies": {
     "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   },
   "dependencies": {
