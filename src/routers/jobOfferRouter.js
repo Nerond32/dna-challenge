@@ -1,5 +1,7 @@
 const express = require('express');
+const validate = require('express-validation');
 const User = require('../models/userModel');
+const paramValidator = require('./paramValidator');
 
 const allowedCategories = [
   'IT',
@@ -29,12 +31,9 @@ const jobOfferRouter = JobOffer => {
       });
     })
     // eslint-disable-next-line consistent-return
-    .post((req, res) => {
+    .post(validate(paramValidator.newJobOffer), (req, res) => {
       const jobOffer = new JobOffer(req.body);
       if (
-        !jobOffer.category ||
-        !jobOffer.startDate ||
-        !jobOffer.endDate ||
         jobOffer.startDate < Date.now() ||
         jobOffer.startDate >= jobOffer.endDate ||
         !allowedCategories.includes(jobOffer.category)
