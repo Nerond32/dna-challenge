@@ -1,11 +1,11 @@
 const Joi = require('@hapi/joi');
 
 const allowedCategories = [
-  /IT/,
-  /Food & Drinks/,
-  /Office/,
-  /Courier/,
-  /Shop assistant/
+  'IT',
+  'Food & Drinks',
+  'Office',
+  'Courier',
+  'Shop assistant'
 ];
 
 module.exports = {

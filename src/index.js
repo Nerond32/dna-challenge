@@ -7,17 +7,13 @@ const userRouter = require('./routers/userRouter')(User);
 const jobOfferRouter = require('./routers/jobOfferRouter')(JobOffer);
 
 mongoose.connect('mongodb://localhost/usersAPI', { useNewUrlParser: true });
-
+const port = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-const port = process.env.PORT || 3000;
 
 app.use('/api', userRouter);
 app.use('/api', jobOfferRouter);
-app.get('/', (req, res) => {
-  res.send('Hello world');
-});
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Server started on port ${port}`);

@@ -8,7 +8,6 @@ const userRouter = User => {
   const controller = userController(User);
   router
     .route('/users')
-    .get(controller.getUsers)
     .post(validate(userValidator.newUser), controller.postUser);
   router.use('/users/:userID', controller.findUser);
   router

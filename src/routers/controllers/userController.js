@@ -1,16 +1,4 @@
 const userController = User => {
-  const getUsers = (req, res) => {
-    const { query } = req;
-    if (req.query.login) {
-      query.login = req.query.login;
-    }
-    User.find(query, (err, users) => {
-      if (err) {
-        return res.send(err);
-      }
-      return res.json(users);
-    });
-  };
   const postUser = (req, res) => {
     if (req.body.accCreated) {
       delete req.body.accCreated;
@@ -65,7 +53,7 @@ const userController = User => {
     });
   };
 
-  return { getUsers, postUser, findUser, getUser, patchUser, deleteUser };
+  return { postUser, findUser, getUser, patchUser, deleteUser };
 };
 
 module.exports = userController;
