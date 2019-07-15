@@ -1,13 +1,5 @@
 const User = require('../../models/userModel');
 
-const allowedCategories = [
-  'IT',
-  'Food & Drinks',
-  'Office',
-  'Courier',
-  'Shop assistant'
-];
-
 const jobOfferController = JobOffer => {
   const getJobOffers = (req, res) => {
     const { query } = req;
@@ -29,8 +21,7 @@ const jobOfferController = JobOffer => {
     const jobOffer = new JobOffer(req.body);
     if (
       jobOffer.startDate < Date.now() ||
-      jobOffer.startDate >= jobOffer.endDate ||
-      !allowedCategories.includes(jobOffer.category)
+      jobOffer.startDate >= jobOffer.endDate
     ) {
       return res.sendStatus(400);
     }

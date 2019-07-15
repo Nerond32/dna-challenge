@@ -12,16 +12,13 @@ const userController = User => {
     });
   };
   const postUser = (req, res) => {
-    if (req.body.login && req.body.password) {
-      if (req.body.accCreated) {
-        delete req.body.accCreated;
-      }
-      const user = new User(req.body);
-      user.accCreated = Date.now();
-      user.save();
-      return res.status(201).json(user);
+    if (req.body.accCreated) {
+      delete req.body.accCreated;
     }
-    return res.sendStatus(400);
+    const user = new User(req.body);
+    user.accCreated = Date.now();
+    user.save();
+    return res.status(201).json(user);
   };
   const findUser = (req, res, next) => {
     User.findById(req.params.userID, (err, user) => {
