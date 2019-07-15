@@ -1,6 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
-const paramValidator = require('./paramValidator');
+const userValidator = require('./validators/userValidator');
 
 const userRouter = User => {
   const router = express.Router();
@@ -18,7 +18,7 @@ const userRouter = User => {
         return res.json(users);
       });
     })
-    .post(validate(paramValidator.newUser), (req, res) => {
+    .post(validate(userValidator.newUser), (req, res) => {
       if (req.body.login && req.body.password) {
         if (req.body.accCreated) {
           delete req.body.accCreated;
@@ -48,7 +48,7 @@ const userRouter = User => {
       return res.json(req.user);
     })
 
-    .patch(validate(paramValidator.updateUser), (req, res) => {
+    .patch(validate(userValidator.updateUser), (req, res) => {
       // eslint-disable-next-line no-underscore-dangle
       if (req.body._id) {
         // eslint-disable-next-line no-underscore-dangle
