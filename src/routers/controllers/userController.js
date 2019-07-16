@@ -42,7 +42,7 @@ const userController = User => {
       login: req.user.login,
       creationDate: req.user.creationDate
     };
-    return res.json(response);
+    return res.status(200).json(response);
   };
   const patchUser = (req, res) => {
     // eslint-disable-next-line no-underscore-dangle
@@ -61,6 +61,9 @@ const userController = User => {
       const [key, value] = element;
       user[key] = value;
     });
+    if (req.params.newLogin) {
+      user.login = req.params.newLogin;
+    }
     req.user.save(err => {
       if (err) {
         res.send(err);
@@ -69,7 +72,7 @@ const userController = User => {
         login: req.user.login,
         creationDate: req.user.creationDate
       };
-      return res.json(response);
+      return res.status(200).json(response);
     });
   };
   const deleteUser = (req, res) => {
