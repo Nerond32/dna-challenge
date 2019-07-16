@@ -7,13 +7,16 @@ const jobOfferController = JobOffer => {
       query.category = req.query.category;
     }
     if (req.query.employerLogin) {
-      query.login = req.query.employerLogin;
+      query.employerLogin = req.query.employerLogin;
     }
     JobOffer.find(query, (err, offers) => {
       if (err) {
-        return res.send(err);
+        return res.status(400).send(err);
       }
-      return res.json(offers);
+      if (!offers.length) {
+        return res.sendStatus(404);
+      }
+      return res.status(200).json(offers);
     });
   };
   // eslint-disable-next-line consistent-return
