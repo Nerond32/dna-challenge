@@ -2,7 +2,9 @@ module.exports = {
     env: {
       commonjs: true,
       es6: true,
-      node: true
+      node: true,
+      jest: true,
+      jasmine: true
     },
     plugins:[
       'prettier'
@@ -14,7 +16,7 @@ module.exports = {
     rules: {
       quotes: ['error', 'single'],
       'no-unused-vars': 'warn',
-      'prettier/prettier': ['error', { 'singleQuote': true }]
+      'prettier/prettier': ['error', { 'singleQuote': true, 'endOfLine': 'auto' }]
     }
   };
   
