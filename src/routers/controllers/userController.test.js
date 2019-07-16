@@ -101,7 +101,10 @@ describe('User Controller:', () => {
           newLogin: 'betterjohnny'
         },
         user: {
-          login: 'johnny'
+          login: 'johnny',
+          save: cb => {
+            cb();
+          }
         }
       };
       const res = {
