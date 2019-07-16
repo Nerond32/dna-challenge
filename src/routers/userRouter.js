@@ -9,9 +9,9 @@ const userRouter = User => {
   router
     .route('/users')
     .post(validate(userValidator.newUser), controller.postUser);
-  router.use('/users/:userID', controller.findUser);
+  router.use('/users/:login', controller.findUser);
   router
-    .route('/users/:userID')
+    .route('/users/:login')
     .get(controller.getUser)
     .patch(validate(userValidator.updateUser), controller.patchUser)
     .delete(controller.deleteUser);

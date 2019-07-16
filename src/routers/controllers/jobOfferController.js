@@ -6,8 +6,8 @@ const jobOfferController = JobOffer => {
     if (req.query.category) {
       query.category = req.query.category;
     }
-    if (req.query.employerID) {
-      query.employerID = req.query.employerID;
+    if (req.query.employerLogin) {
+      query.login = req.query.employerLogin;
     }
     JobOffer.find(query, (err, offers) => {
       if (err) {
@@ -23,14 +23,19 @@ const jobOfferController = JobOffer => {
       jobOffer.startDate < Date.now() ||
       jobOffer.startDate >= jobOffer.endDate
     ) {
-      return res.sendStatus(400);
+      return res
+        .status(400)
+        .json('Starting date cannot be set in the past or  after the end date');
     }
-    User.findById(jobOffer.employerID, (err, user) => {
+    const query = { login: req.body.employerLogin };
+    User.find(query, (err, user) => {
       if (err) {
         return res.send(err);
       }
-      if (!user) {
-        return res.sendStatus(400);
+      if (!user.length) {
+        return res.status(400).json({
+          message: 'User with this login does not exist'
+        });
       }
       jobOffer.save();
       return res.status(201).json(jobOffer);
