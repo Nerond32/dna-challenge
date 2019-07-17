@@ -1,18 +1,12 @@
-const { MongoMemoryServer } = require('mongodb-memory-server');
-const mongoose = require('mongoose');
 const jobOfferController = require('./jobOfferController');
 const JobOffer = require('../../models/jobOfferModel');
 const User = require('../../models/userModel');
+const { startMongo, stopMongo } = require('../../testUtils');
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
-let mongoServer;
 beforeAll(async () => {
-  mongoServer = new MongoMemoryServer();
-  const mongoUri = await mongoServer.getConnectionString();
-  await mongoose.connect(mongoUri, { useNewUrlParser: true }, err => {
-    if (err) throw err;
-  });
+  await startMongo();
   const user = new User({
     login: 'wild_andrew69',
     password: '$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe',
@@ -20,10 +14,11 @@ beforeAll(async () => {
   });
   await user.save();
 });
+
 afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
+  await stopMongo();
 });
+
 afterEach(() => {
   jest.clearAllMocks();
 });
